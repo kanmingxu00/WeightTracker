@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Home from './screens/Home'
+import WeightGraph from './screens/WeightGraph';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <ul className="List">
             <li className="Objects">
               <Link className="Link" to="/">Home</Link>
+              <Link className="Link" to="/graph">WeightGraph</Link>
             </li>
           </ul>
         </nav>
@@ -23,6 +25,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/graph" element={<WeightGraph />} />
         </Routes>
       </div>
     </Router>

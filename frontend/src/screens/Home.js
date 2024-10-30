@@ -1,13 +1,36 @@
-import React, { Component } from "react";
+import './Home.css';
+import React, { useState,  Component } from "react";
 
-export default class Home extends Component {
-    render() {
-        return (
-            <div className="Container">
-                <h1 className="h1">Weight Tracker</h1>
-                <h2 className="h2">The easiest way to see your progress</h2>
+function Home() {
+    const [weight, setWeight] = useState('eg: 175');
+    const [date, setDate] = useState('someDate');
+
+    return (
+        <div className="Container">
+            <h2 className="h1">Weight Tracker</h2>
+            <div className="flexBox">
+                <div>
+                    Weight:
+                </div>
+                <input
+                    type="text"
+                    value={weight}
+                    onChange={setWeight}
+                />
             </div>
-            
-        )
-    }
+            <div className="flexBox">
+                <div>
+                    Date:
+                </div>
+                <input
+                    type="text"
+                    value={date}
+                    onChange={setDate}
+                />
+            </div>
+        </div>
+        
+    );
 }
+
+export default Home;

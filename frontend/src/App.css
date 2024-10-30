@@ -13,7 +13,7 @@
 }
 
 .Objects {
-  float: left;
+  display: flex;
 }
 
 .Link {
