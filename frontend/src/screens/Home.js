@@ -1,9 +1,20 @@
 import './Home.css';
-import React, { useState,  Component } from "react";
+import React, { useState, useEffect } from "react";
+import { fetchUsers } from '../api/Api';
 
 function Home() {
     const [weight, setWeight] = useState('eg: 175');
     const [date, setDate] = useState('someDate');
+    const [name, setName] = useState('someName');
+
+    useEffect(() => {
+        async function fetchData() {
+            const newNames = await fetchUsers();
+            console.log(newNames);
+            setName(newNames.users[0]);
+        }
+        fetchData();
+    }, [])
 
     return (
         <div className="Container">
@@ -27,6 +38,14 @@ function Home() {
                     value={date}
                     onChange={setDate}
                 />
+            </div>
+            <div className="flexBox">
+                <div>
+                    Name: 
+                </div>
+                <div>
+                    {name} 
+                </div>
             </div>
         </div>
         
