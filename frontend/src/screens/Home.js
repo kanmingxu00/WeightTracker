@@ -1,18 +1,23 @@
 import './Home.css';
 import React, { useState, useEffect } from "react";
-import { fetchUsers } from '../api/Api';
+import { getUsers, newUser, addWeight, deleteUser } from '../api/Api';
 
 function Home() {
     const [weight, setWeight] = useState('eg: 175');
-    const [date, setDate] = useState('someDate');
-    const [name, setName] = useState('someName');
+    const [user, setUser] = useState('kan');
+    const [userWeights, setUserWeights] = useState('');
+
+
+    const fetchData = async () => {
+        const userWeights = await getUsers();
+        let sumString = '';
+        for (const key in userWeights) {
+            sumString += `(${key}, ${userWeights[key]}) `
+        }
+        setUserWeights(sumString)
+    }
 
     useEffect(() => {
-        async function fetchData() {
-            const newNames = await fetchUsers();
-            console.log(newNames);
-            setName(newNames.users[0]);
-        }
         fetchData();
     }, [])
 
@@ -21,30 +26,33 @@ function Home() {
             <h2 className="h1">Weight Tracker</h2>
             <div className="flexBox">
                 <div>
+                    User:
+                </div>
+                <input
+                    type="text"
+                    value={user}
+                    onChange={event => setUser(event.target.value)}
+                />
+                <button onClick={() => newUser(user)} />
+            </div>
+            <div className="flexBox">
+                <div>
                     Weight:
                 </div>
                 <input
                     type="text"
                     value={weight}
-                    onChange={setWeight}
+                    onChange={event => setWeight(event.target.value)}
                 />
+                <button onClick={() => addWeight(user, parseInt(weight))} />
             </div>
             <div className="flexBox">
                 <div>
-                    Date:
-                </div>
-                <input
-                    type="text"
-                    value={date}
-                    onChange={setDate}
-                />
-            </div>
-            <div className="flexBox">
-                <div>
-                    Name: 
+                    UserWeights: 
                 </div>
                 <div>
-                    {name} 
+                    {userWeights} 
+                    <button onClick={fetchData} />
                 </div>
             </div>
         </div>
